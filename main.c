@@ -6,8 +6,6 @@
  * @av: Arguments
  * Return: Null
  */
-void handleCtrlC(int sig);
-
 int main(int ac, char **av)
 {
 	(void)av;

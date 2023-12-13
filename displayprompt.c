@@ -17,7 +17,7 @@ void display_prompt(void)
 		lenbuf = getline(&text, &bufsize, stdin);
 		if (lenbuf == -1)
 		{
-			perror("Error");	
+			perror("Error");
 			exit(98);
 		}
 		if (compareExit(text, "exit") == 0)
@@ -42,9 +42,9 @@ void display_prompt(void)
 										!(_strcmpdir(*environ, "TERM")) ||
 										!(_strcmpdir(*environ, "PATH")))
 						{
-							place(*environ), place("\n"); 
+							place(*environ), place("\n");
 						}
-						environ++; 
+						environ++;
 					}
 			}
 		child_pid = fork();

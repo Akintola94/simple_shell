@@ -1,6 +1,6 @@
 #include "main.h"
 /**
- * run_process - similar to puts in C
+ * run_command - similar to puts in C
  * @cmd: a pointer to integer set to 402
  *
  * Return: int
