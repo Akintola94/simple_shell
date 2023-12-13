@@ -8,19 +8,26 @@ void display_prompt(void)
 {
 	for (;;)
 	{
-		char *text = NULL, **environ;
+		char *text = NULL;
 		pid_t child_pid;
 		int status, lenbuf;
-		size_t bufsize  = 0;
+		size_t bufsize = 0;
 
 		place("$ ");
 		lenbuf = getline(&text, &bufsize, stdin);
 		if (lenbuf == -1)
-				exit(98);
+		{
+			perror("Error");	
+			exit(98);
+		}
 		if (compareExit(text, "exit") == 0)
-				exit(0);
+		{
+			free(text);
+			break;
+		}
 		if (compareEnv(text, "env") == 0)
 		{
+				extern char **environ;
 				while (*environ != NULL)
 				{
 						if (!(_strcmpdir(*environ, "USER")) ||
@@ -35,13 +42,24 @@ void display_prompt(void)
 										!(_strcmpdir(*environ, "TERM")) ||
 										!(_strcmpdir(*environ, "PATH")))
 						{
-							place(*environ), place("\n"); }
-						environ++; }}
+							place(*environ), place("\n"); 
+						}
+						environ++; 
+					}
+			}
 		child_pid = fork();
 		if (child_pid < 0)
-				perror("Error");
+		{
+			perror("Error");
+		}
 		if (child_pid == 0)
-				identify_string(text);
-	else
-				wait(&status);
-	}}
+		{
+			identify_string(text);
+		}
+		else
+		{
+			wait(&status);
+		}
+		free(text);
+	}
+}
