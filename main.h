@@ -15,7 +15,7 @@ extern char **environ;
 int _strlen(char *str);
 int _putchar(char c);
 char *show_input(void);
-void displayprompt(void);
+void display_prompt(void);
 char *_strcat(char *src);
 void place(char *str);
 char *findfile(char *command);
@@ -28,5 +28,5 @@ int compareExit(char *s1, char *s2);
 int compareEnv(char *s1, char *s2);
 void run_command(char **cmd);
 char **identify_string(char *parameter);
-void controlC(int sig);
+void handleCtrlC(int sig);
 #endif

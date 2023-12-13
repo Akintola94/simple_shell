@@ -14,6 +14,6 @@ int main(int ac, char **av)
 	(void)ac;
 
 	signal(SIGINT, handleCtrlC);
-	displayprompt();
+	display_prompt();
 	return (0);
 }
