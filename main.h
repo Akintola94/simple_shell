@@ -29,5 +29,12 @@ int compareEnv(char *s1, char *s2);
 void run_command(char **cmd);
 char **identify_string(char *parameter);
 void handleCtrlC(int sig);
+<<<<<<< HEAD
 extern char **environ;
+=======
+ssize_t input_buf(ino_t *info, char **buf, size_t *len)
+void clear_info(info_t *info)
+void set_info(info_t *info, char **av)
+int add(int no1, int no2);
+>>>>>>> 50803d211bca62e5474b6c3be074a67fdbbba71d
 #endif
