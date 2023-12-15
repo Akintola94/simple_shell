@@ -29,4 +29,5 @@ int compareEnv(char *s1, char *s2);
 void run_command(char **cmd);
 char **identify_string(char *parameter);
 void handleCtrlC(int sig);
+extern char **environ;
 #endif

@@ -14,20 +14,22 @@ void display_prompt(void)
 		size_t bufsize = 0;
 
 		place("$ ");
+
 		lenbuf = getline(&text, &bufsize, stdin);
 		if (lenbuf == -1)
 		{
 			perror("Error");
 			exit(98);
 		}
+
 		if (compareExit(text, "exit") == 0)
 		{
 			free(text);
 			break;
 		}
+
 		if (compareEnv(text, "env") == 0)
 		{
-				extern char **environ;
 				while (*environ != NULL)
 				{
 						if (!(_strcmpdir(*environ, "USER")) ||
