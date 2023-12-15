@@ -6,13 +6,13 @@
  **/
 void display_prompt(void)
 {
+	char *text = NULL;
+	pid_t child_pid;
+	int status, lenbuf;
+	size_t bufsize = 0;
+
 	for (;;)
 	{
-		char *text = NULL;
-		pid_t child_pid;
-		int status, lenbuf;
-		size_t bufsize = 0;
-
 		place("$ ");
 		lenbuf = getline(&text, &bufsize, stdin);
 		if (lenbuf == -1)
@@ -27,26 +27,25 @@ void display_prompt(void)
 		}
 		if (compareEnv(text, "env") == 0)
 		{
-				extern char **environ;
-				while (*environ != NULL)
+			while (*environ != NULL)
+			{
+				if (!(_strcmpdir(*environ, "USER")) ||
+						!(_strcmpdir(*environ, "LANGUAGE")) ||
+						!(_strcmpdir(*environ, "SESSION")) ||
+						!(_strcmpdir(*environ, "COMPIZ_CONFIG_PROFILE")) ||
+						!(_strcmpdir(*environ, "SHLV")) ||
+						!(_strcmpdir(*environ, "HOME")) ||
+						!(_strcmpdir(*environ, "C_IS")) ||
+						!(_strcmpdir(*environ, "DESKTOP_SESSION")) ||
+						!(_strcmpdir(*environ, "LOGNAME")) ||
+						!(_strcmpdir(*environ, "TERM")) ||
+						!(_strcmpdir(*environ, "PATH")))
 				{
-						if (!(_strcmpdir(*environ, "USER")) ||
-										!(_strcmpdir(*environ, "LANGUAGE")) ||
-										!(_strcmpdir(*environ, "SESSION")) ||
-										!(_strcmpdir(*environ, "COMPIZ_CONFIG_PROFILE")) ||
-										!(_strcmpdir(*environ, "SHLV")) ||
-										!(_strcmpdir(*environ, "HOME")) ||
-										!(_strcmpdir(*environ, "C_IS")) ||
-										!(_strcmpdir(*environ, "DESKTOP_SESSION")) ||
-										!(_strcmpdir(*environ, "LOGNAME")) ||
-										!(_strcmpdir(*environ, "TERM")) ||
-										!(_strcmpdir(*environ, "PATH")))
-						{
-							place(*environ), place("\n");
-						}
-						environ++;
-					}
+					place(*environ), place("\n");
+				}
+					environ++;
 			}
+		}
 		child_pid = fork();
 		if (child_pid < 0)
 		{
